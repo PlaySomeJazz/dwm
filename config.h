@@ -209,7 +209,6 @@ static const Key keys[] = {
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
-	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
@@ -238,6 +237,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
 	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ "torwrap", NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		{.v = (const char*[]){ "td-toggle", NULL } } },
+	{ MODKEY|ShiftMask,		XK_x,		spawn,		{.v = (const char*[]){ "emby-toggle", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
 	{ MODKEY,			XK_F9,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
 	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "unmounter", NULL } } },
