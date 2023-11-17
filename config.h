@@ -207,7 +207,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
-	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
@@ -215,7 +214,6 @@ static const Key keys[] = {
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat ; pkill -RTMIN+6 dwmblocks") },
 	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
-	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
 	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "mpc", "next", NULL } } },
@@ -239,8 +237,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		{.v = (const char*[]){ "td-toggle", NULL } } },
 	{ MODKEY|ShiftMask,		XK_x,		spawn,		{.v = (const char*[]){ "emby-toggle", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
-	{ MODKEY,			XK_F9,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
-	{ MODKEY,			XK_F10,		spawn,		{.v = (const char*[]){ "unmounter", NULL } } },
+	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
+	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "unmounter", NULL } } },
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
