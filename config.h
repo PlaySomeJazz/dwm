@@ -162,6 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv $(xclip -o)") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("y") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("yt") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("pix") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
