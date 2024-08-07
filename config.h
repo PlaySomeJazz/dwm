@@ -158,9 +158,9 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("volume jumpup") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv $(xclip -o)") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("y") },
-	{ MODKEY,			XK_z,		spawn,		SHCMD("yt") },
-	{ MODKEY,			XK_c,		spawn,		SHCMD("pix") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("yt audio") },
+	{ MODKEY,			XK_z,		spawn,		SHCMD("yt video") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("yt pix") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
