@@ -162,7 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("volume up") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("volume jumpup") },
 
-	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv $(xclip -o)") },
+	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("yt audio") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("yt video") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("yt pix") },
