@@ -167,6 +167,8 @@ static const Key keys[] = {
 	{ MODKEY,			XK_z,		spawn,		SHCMD("yt video") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("yt pix") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
+	{ MODKEY,			XK_u,		spawn,		SHCMD("kbd") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."; $TERMINAL -e stig") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
@@ -178,8 +180,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
 	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,			XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[5]} }, /* monocle */
+	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
+	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[5]} }, */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
@@ -241,7 +243,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		{.v = (const char*[]){ "displayselect", NULL } } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD(TERMINAL " -e pulsemixer") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
-	{ MODKEY,			XK_e,		spawn,		{.v = (const char*[]){ "torwrap", NULL } } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		{.v = (const char*[]){ "td-toggle", NULL } } },
 	{ MODKEY|ShiftMask,		XK_x,		spawn,		{.v = (const char*[]){ "emby-toggle", NULL } } },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
