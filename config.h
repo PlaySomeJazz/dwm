@@ -168,7 +168,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_c,		spawn,		SHCMD("yt pix") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("kbd") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send "Starting torrent daemon..."; $TERMINAL -e stig") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...'; $TERMINAL -e stig") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
