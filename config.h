@@ -157,10 +157,10 @@ static const Key keys[] = {
 	TAGKEYS(			XK_9,		8)
 	{ MODKEY,			XK_0,		view,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("volume down") },
-	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("volume jumpdown") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("volume up") },
-	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("volume jumpup") },
+	{ MODKEY,			XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%- && volume") },
+	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%- && volume") },
+	{ MODKEY,			XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+ && volume") },
+	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%+ && volume") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("yt audio") },
@@ -260,9 +260,9 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Delete,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("volume mute") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("volume up") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("volume down") },
+	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && volume") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+ && volume") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%- && volume") },
 	{ 0, XF86XK_AudioPrev,		spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ 0, XF86XK_AudioNext,		spawn,		{.v = (const char*[]){ "mpc",  "next", NULL } } },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "mpc", "pause", NULL } } },
@@ -286,8 +286,8 @@ static const Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,	spawn,		{.v = (const char*[]){ "synclient", "TouchpadOff=1", NULL } } },
 	{ 0, XF86XK_TouchpadOn,		spawn,		{.v = (const char*[]){ "synclient", "TouchpadOff=0", NULL } } },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("backlight up") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("backlight down") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("brightnessctl -e4 set 5%+ && backlight") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("brightnessctl -e4 set 5%- && backlight") },
 
 	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
 	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
