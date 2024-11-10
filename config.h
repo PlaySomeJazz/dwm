@@ -157,10 +157,10 @@ static const Key keys[] = {
 	TAGKEYS(			XK_9,		8)
 	{ MODKEY,			XK_0,		view,		{.ui = ~0 } },
 	{ MODKEY|ShiftMask,		XK_0,		tag,		{.ui = ~0 } },
-	{ MODKEY,			XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
-	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
-	{ MODKEY,			XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
-	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ MODKEY,			XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ MODKEY|ShiftMask,		XK_minus,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ MODKEY,			XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("yt audio") },
@@ -260,9 +260,9 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Delete,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; if [ "${v#*MUTED}" != "$v" ]; then p=mute.svg; t=Muted; else i=${v#0.}; p=on.svg; t=${i}%; fi; [ "$v" = "1.00" ] && i=100; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-$p Volume ${t} -t 2000") },
-	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
-	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = "1.00" ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; if [ '${v#*MUTED}' != '$v' ]; then p=mute; t=Muted; else i=${v#0.}; p=on; t=${i}%; fi; [ $v = '1.00' ] && i=100; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-$p.svg Volume ${t} -t 2000") },
+	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
+	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 3%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#Volume: }; [ $v = '1.00' ] && i=100 || i=${v#0.}; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-on.svg Volume ${i}% -t 2000") },
 	{ 0, XF86XK_AudioPrev,		spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ 0, XF86XK_AudioNext,		spawn,		{.v = (const char*[]){ "mpc",  "next", NULL } } },
 	{ 0, XF86XK_AudioPause,		spawn,		{.v = (const char*[]){ "mpc", "pause", NULL } } },
