@@ -286,8 +286,8 @@ static const Key keys[] = {
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,	spawn,		{.v = (const char*[]){ "synclient", "TouchpadOff=1", NULL } } },
 	{ 0, XF86XK_TouchpadOn,		spawn,		{.v = (const char*[]){ "synclient", "TouchpadOff=0", NULL } } },
-	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("brightnessctl -e4 set 5%+; c=$(cat /sys/class/backlight/*/brightness); m=$(cat /sys/class/backlight/*/max_brightness); b=$((100 * curr_brightness / max_brightness)); dunstify -a Backlight -u low -r 9994 -h int:value:${b} -i $PIX/brightness.svg Brightness ${b}% -t 1000") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("brightnessctl -e4 set 5%-; c=$(cat /sys/class/backlight/*/brightness); m=$(cat /sys/class/backlight/*/max_brightness); b=$((100 * curr_brightness / max_brightness)); dunstify -a Backlight -u low -r 9994 -h int:value:${b} -i $PIX/brightness.svg Brightness ${b}% -t 1000") },
+	{ 0, XF86XK_MonBrightnessUp,	spawn,		SHCMD("brightnessctl -e4 set 5%+; c=$(cat /sys/class/backlight/*/brightness); m=$(cat /sys/class/backlight/*/max_brightness); b=$((100 * c / m)); dunstify -a Backlight -u low -r 9994 -h int:value:${b} -i $PIX/brightness.svg Brightness ${b}% -t 1000") },
+	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("brightnessctl -e4 set 5%-; c=$(cat /sys/class/backlight/*/brightness); m=$(cat /sys/class/backlight/*/max_brightness); b=$((100 * c / m)); dunstify -a Backlight -u low -r 9994 -h int:value:${b} -i $PIX/brightness.svg Brightness ${b}% -t 1000") },
 
 	/* { MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } }, */
 	/* { MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } }, */
