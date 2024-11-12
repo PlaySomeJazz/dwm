@@ -260,7 +260,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Delete,	spawn,		{.v = (const char*[]){ "dmenurecord", "kill", NULL } } },
 	{ MODKEY,			XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
 
-	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("zsh -c 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; v=$(wpctl get-volume @DEFAULT_SINK@); if [ ${v#*MUTED} != $v ]; then p=mute; t=Muted; else i=${v#*.}; p=on; t=${i}%; fi; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-${p}.svg Volume ${t} -t 2000'") },
+	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; v=$(wpctl get-volume @DEFAULT_SINK@); if [ \"${v#*MUTED}\" != \"$v\" ]; then p=mute; t=Muted; else i=${v#*.}; p=on; t=${i}%; fi; dunstify -a Volume -u low -r 9993 -h int:value:${i} -i $PIX/volume-${p}.svg Volume ${t} -t 2000") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("wpctl set-volume -l 0.99 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#*.}; dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("wpctl set-volume -l 0.99 @DEFAULT_AUDIO_SINK@ 3%-; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#*.}; dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000") },
 	{ 0, XF86XK_AudioPrev,		spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
