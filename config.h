@@ -144,7 +144,7 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("set -- ~/.local/share/chars/*; c=$(cat $@ | dmenu -i -l 30); c=${c%% *}; [ -n ${c} ] && printf %s ${c} | xclip -selection clipboard && xdotool type ${c}") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("set -- ~/.local/share/chars/*; c=$(cat $@ | dmenu -i -l 30); c=${c%% *}; [ -n ${c} ] && printf %s ${c} | xclip -selection clipboard && xdotool key Shift+Insert") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
