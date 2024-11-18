@@ -144,7 +144,7 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 ~/.local/share/chars/* | dmenu -i -l 30); c=${c%% *}; [ -n ${c} ] && printf %s ${c} | xclip -selection clipboard && xdotool key Shift+Insert") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 ~/.local/share/chars/* | dmenu -i -l 30); c=${c%% *}; [ -n ${c} ] && printf %s ${c} | xclip -sel c && xdotool key Shift+Insert") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -163,10 +163,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 0.99 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#*.}; dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("yt audio") },
-	{ MODKEY,			XK_z,		spawn,		SHCMD("yt video") },
-	{ MODKEY,			XK_c,		spawn,		SHCMD("yt image") },
-	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("yt dwnld") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("dl -a") },
+	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -i") },
+	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q 'ro'; then setxkbmap us; else setxkbmap ro std; fi") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...'; $TERMINAL -e stig") },
