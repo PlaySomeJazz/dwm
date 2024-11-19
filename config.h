@@ -168,7 +168,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -i") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
-	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q 'ro'; then setxkbmap us; else setxkbmap ro std; fi") },
+	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...'; $TERMINAL -e stig") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
@@ -221,7 +221,7 @@ static const Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | cut -d ' ' -f 1,4); [ -n \"$s\" ] && pid=$(printf '%s' \"$s\" | cut -d' ' -f1); kill -9 $pid") },
+	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1\" \"$4}'); [ -n \"$s\" ] && kill -9 $(printf '%s' \"$s\" | cut -d' ' -f1)") },
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e podboat") },
 	{ MODKEY,			XK_slash,	spawn,		SHCMD(TERMINAL " -e newsboat") },
