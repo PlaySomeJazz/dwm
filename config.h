@@ -177,10 +177,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
-	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
+	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
-	{ MODKEY|ShiftMask,		XK_y,		setlayout,	{.v = &layouts[3]} }, /* dwindle */
+	/* { MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[3]} }, */
 	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
 	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[5]} }, */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
@@ -222,6 +222,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ -n \"$s\" ] && kill -9 $s") },
+	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ -n \"$t\" ] && tsp -k $t") },
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e podboat") },
 	{ MODKEY,			XK_slash,	spawn,		SHCMD(TERMINAL " -e newsboat") },
