@@ -163,11 +163,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 0.99 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_SINK@); v=${v#*.}; dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("dl -a") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -a") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -i") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" && echo \"$input\" >> ~/.capture'") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
+	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...'; $TERMINAL -e stig") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
@@ -185,7 +186,7 @@ static const Key keys[] = {
 	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[5]} }, */
 	{ MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
-	{ MODKEY,			XK_o,		incnmaster,     {.i = +1 } },
+	/* { MODKEY,			XK_o,		incnmaster,     {.i = +1 } }, */
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,			spawn,		{.v = (const char*[]){ "mpc", "toggle", NULL } } },
 	{ MODKEY|ShiftMask,		XK_p,			spawn,		SHCMD("mpc pause") },
