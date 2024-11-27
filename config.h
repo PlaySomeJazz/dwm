@@ -165,7 +165,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -a") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" && echo \"$input\" >> ~/.capture'") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> ~/.capture'") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
