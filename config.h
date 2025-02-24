@@ -163,7 +163,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no ~/Videos/Watchlist") },
-	{ MODKEY,			XK_c,		spawn,		SHCMD("dl -a") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> ~/.capture'") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
