@@ -254,7 +254,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "mounter", "unmount", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(busctl get-property org.bluez /org/bluez/hci0 org.bluez.Adapter1 Powered)\" = \"b true\" ] && set \"power off\" disabled off off || set \"power on\" enabled on on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && bluetoothctl -- $1 && notify-send -i $PIX/bluetooth-$4.svg \"Bluetooth $2\"") },
+	{ MODKEY|ShiftMask, XK_c, spawn, SHCMD("bt=$(cat /sys/class/bluetooth/hci0/rfkill*/state); [ \"$bt\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\"") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
