@@ -166,7 +166,8 @@ static const Key keys[] = {
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") }, */
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
+	/* { MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") }, */
+	{ MODKEY,			XK_x,		spawn,		SHCMD("auto $(xclip -o)") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
@@ -254,7 +255,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "mounter", "unmount", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("bt=$(cat /sys/class/bluetooth/hci0/rfkill*/state); [ \"$bt\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -SIGTRAP status") },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -SIGTRAP status") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
