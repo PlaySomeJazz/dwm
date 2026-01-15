@@ -172,7 +172,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...'; $TERMINAL -e stig") },
+	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...' && sleep 3 && pkill -12 status && $TERMINAL -e stig") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
@@ -225,7 +225,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ -n \"$s\" ] && kill -9 $s") },
-	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ -n \"$t\" ] && tsp -k $t") },
+	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ -n \"$t\" ] && tsp -k $t && pkill -10 status") },
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e podboat") },
 	{ MODKEY,			XK_slash,	spawn,		SHCMD(TERMINAL " -e newsboat") },
@@ -249,13 +249,13 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		{.v = (const char*[]){ "arandr", NULL } } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD(TERMINAL " -e pulsemixer") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
-	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
+	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
 	{ MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("systemctl is-active --quiet emby-server && set stop disabled off || set start enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Emby?\")\" = \"Yes\" ] && sudo systemctl $1 emby-server && notify-send -i $PIX/emby.svg \"Emby $2\"") },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
 	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "mounter", "unmount", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -SIGTRAP status") },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -5 status") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
