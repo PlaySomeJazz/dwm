@@ -166,8 +166,7 @@ static const Key keys[] = {
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") }, */
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	/* { MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") }, */
-	{ MODKEY,			XK_x,		spawn,		SHCMD("auto $(xclip -o)") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no $(xclip -o)") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
@@ -188,7 +187,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_u,		setlayout,	{.v = &layouts[4]} }, /* deck */
 	/* { MODKEY,			XK_u,		setlayout,	{.v = &layouts[5]} }, */
 	/* { MODKEY,			XK_i,		setlayout,	{.v = &layouts[6]} }, */
-	{ MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	/* { MODKEY|ShiftMask,		XK_i,		setlayout,	{.v = &layouts[7]} }, */
 	/* { MODKEY,			XK_o,		incnmaster,     {.i = +1 } }, */
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,			spawn,		{.v = (const char*[]){ "mpc", "toggle", NULL } } },
@@ -257,6 +256,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "mounter", "unmount", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
 	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -34 status") },
+	{ MODKEY|ShiftMask,		XK_i,		spawn,		SHCMD("[ \"$(cat /sys/class/net/w*/operstate)\" = up ] && set off disabled || set on enabled; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $1 wi-fi?\")\" = \"Yes\" ] && nmcli r wifi $1 && notify-send -i $PIX/wifi-$1.svg \"wifi $2\" && pkill -35 status") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
@@ -279,6 +279,7 @@ static const Key keys[] = {
 	{ 0, XF86XK_AudioForward,	spawn,		{.v = (const char*[]){ "mpc", "seek", "+10", NULL } } },
 	{ 0, XF86XK_AudioMedia,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
 	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+	{ 0, XK_KP_Add,			spawn,		SHCMD("xdotool key ctrl+c && auto $(xclip -o)") },
 	/* { 0, XF86XK_PowerOff,		spawn,		{.v = (const char*[]){ "sysact", NULL } } }, */
 	{ 0, XF86XK_Calculator,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "bc", "-l", NULL } } },
 	{ 0, XF86XK_Sleep,		spawn,		{.v = (const char*[]){ "sudo", "-A", "zzz", NULL } } },
