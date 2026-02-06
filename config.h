@@ -162,7 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 
-	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no ~/Videos/Watchlist") },
+	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no ~/videos/Watchlist") },
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") }, */
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
