@@ -144,7 +144,7 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 ~/local/share/chars/* | dmenu -i -l 30); [ -n \"$c\" ] && printf %s ${c%% *} | xclip -sel c && xdotool key Shift+Insert") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 ${XDG_DATA_HOME:-$HOME/local/share}/chars/* | dmenu -i -l 30); [ -n \"$c\" ] && printf %s ${c%% *} | xclip -sel c && xdotool key Shift+Insert") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -162,7 +162,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 3%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 
-	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no ~/videos/Watchlist") },
+	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no $WL") },
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") }, */
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
@@ -249,7 +249,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		{.v = (const char*[]){ "arandr", NULL } } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD(TERMINAL " -e pulsemixer") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
-	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && sleep 0.5 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
+	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && sleep 1 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
 	{ MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("systemctl is-active --quiet emby-server && set stop disabled off || set start enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Emby?\")\" = \"Yes\" ] && sudo systemctl $1 emby-server && notify-send -i $PIX/emby.svg \"Emby $2\"") },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
 	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
@@ -328,7 +328,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button5,        sigdwmblocks,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,      Button1,        sigdwmblocks,   {.i = 6} },
 #endif
-	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e nvim ~/local/src/dwmblocks/config.h") },
+	{ ClkStatusText,        ShiftMask,      Button3,        spawn,          SHCMD(TERMINAL " -e nvim $DOTS/src/dwmblocks/config.h") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        defaultgaps,	{0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
