@@ -110,6 +110,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *transmissioncmd[] = { BROWSER, "http://localhost:9091", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -172,7 +173,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_s,		spawn,		SHCMD("searchfiles") },
 	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
-	{ MODKEY,			XK_e,		spawn,		SHCMD("! pidof transmission-daemon >/dev/null && transmission-daemon && notify-send 'Starting torrent daemon...' && sleep 3 && pkill -12 status && $TERMINAL -e stig") },
+	{ MODKEY,			XK_e,		spawn,		{.v = transmissioncmd } },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
