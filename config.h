@@ -164,7 +164,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 15%+; v=$(wpctl get-volume @DEFAULT_AUDIO_SINK@); [ \"${v#*MUTED}\" != \"$v\" ] && dunstify -a Volume -u low -i $PIX/volume-mute.svg Volume Muted -r 9993 -t 2000 || { v=${v#Volume: }; v=$(IFS='.'; set -- $v; printf %s \"$@\"); v=$(printf %.0f $v); dunstify -a Volume -u low -r 9993 -h int:value:${v} -i $PIX/volume-on.svg Volume ${v}% -t 2000; }") },
 
 	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no $WL") },
-	/* { MODKEY,			XK_c,		spawn,		SHCMD("cd $NOTES_DIR || exit; n=`printf '%s\n' * | dmenu -l 15 -i -p 'Notes'`; [ -n \"$n\" ] && $TERMINAL -e $EDITOR \"$n\"") }, */
+	{ MODKEY,			XK_m,		spawn,		SHCMD("if pidof mpd>/dev/null; then $TERMINAL -e ncmpcpp; else mpd && $TERMINAL -e ncmpcpp; fi") },
+	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e jsh -c np") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
@@ -224,12 +225,11 @@ static const Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ -n \"$s\" ] && kill -9 $s") },
+	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ -n \"$s\" ] && kill -9 $s") },
 	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ -n \"$t\" ] && tsp -k $t && pkill -10 status") },
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e podboat") },
 	{ MODKEY,			XK_slash,	spawn,		SHCMD(TERMINAL " -e newsboat") },
-	{ MODKEY,			XK_m,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "ncmpcpp", NULL } } },
 	{ MODKEY,			XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "prev", NULL } } },
 	{ MODKEY|ShiftMask,		XK_comma,	spawn,		{.v = (const char*[]){ "mpc", "seek", "0%", NULL } } },
 	{ MODKEY,			XK_period,	spawn,		{.v = (const char*[]){ "mpc", "next", NULL } } },
@@ -246,7 +246,6 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_Page_Down,	shifttag,	{ .i = +1 } },
 	{ MODKEY,			XK_Insert,	spawn,		SHCMD("xdotool type $(grep -v '^#' ~/local/share/larbs/snippets | dmenu -i -l 50 | cut -d' ' -f1)") },
 
-	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		{.v = (const char*[]){ "arandr", NULL } } },
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD(TERMINAL " -e pulsemixer") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && sleep 1 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
