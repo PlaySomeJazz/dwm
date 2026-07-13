@@ -165,7 +165,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		RUN("ch", "vol", "15", "+") },
 
 	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no $WL") },
-	{ MODKEY,			XK_m,		spawn,		SHCMD("if pidof mpd>/dev/null || mpd; then $TERMINAL -e ncmpcpp") },
+	{ MODKEY,			XK_m,		spawn,		SHCMD("if pidof mpd>/dev/null || mpd; then $TERMINAL -e ncmpcpp; fi") },
 	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e jsh np") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e bluetui") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
