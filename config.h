@@ -146,7 +146,7 @@ static const Key keys[] = {
 	STACKKEYS(MODKEY,                          focus)
 	STACKKEYS(MODKEY|ShiftMask,                push)
 	/* { MODKEY|ShiftMask,		XK_Escape,	spawn,	SHCMD("") }, */
-	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 ${XDG_DATA_HOME:-$HOME/local/share}/chars/* | dmenu -i -l 30); [ -n \"$c\" ] && printf %s ${c%% *} | xclip -sel c && xdotool key Shift+Insert") },
+	{ MODKEY,			XK_grave,	spawn,	SHCMD("c=$(cut -d ';' -f1 $XDG_DATA_HOME/chars/* | dmenu -i -l 30); [ \"$c\" ] && printf %s ${c%% *} | xclip -sel c && xdotool key Shift+Insert") },
 	/* { MODKEY|ShiftMask,		XK_grave,	togglescratch,	SHCMD("") }, */
 	TAGKEYS(			XK_1,		0)
 	TAGKEYS(			XK_2,		1)
@@ -165,19 +165,19 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		RUN("ch", "vol", "15", "+") },
 
 	{ MODKEY,			XK_i,		spawn,		SHCMD("mpv --profile=normalize --terminal=no $WL") },
-	{ MODKEY,			XK_m,		spawn,		SHCMD("if pidof mpd>/dev/null; then $TERMINAL -e ncmpcpp; else mpd && $TERMINAL -e ncmpcpp; fi") },
-	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e jsh -c np") },
-	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e sh -c 'bluetui'") },
+	{ MODKEY,			XK_m,		spawn,		SHCMD("if pidof mpd>/dev/null || mpd; then $TERMINAL -e ncmpcpp") },
+	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e jsh np") },
+	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e bluetui") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ -n \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no $(xclip -o)") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
-	{ MODKEY,			XK_o,		spawn,		SHCMD("watchlater") },
+	{ MODKEY,			XK_o,		spawn,		RUN("watchlater") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
 	{ MODKEY,			XK_e,		spawn,		{.v = transmissioncmd } },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
-	{ MODKEY|ShiftMask,		XK_q,		spawn,		{.v = (const char*[]){ "sysact", NULL } } },
+	{ MODKEY|ShiftMask,		XK_q,		spawn,		SHCMD("dl -i") },
 	{ MODKEY,			XK_w,		spawn,		{.v = (const char*[]){ BROWSER, NULL } } },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
 	{ MODKEY,			XK_r,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "lfub", NULL } } },
@@ -193,7 +193,7 @@ static const Key keys[] = {
 	/* { MODKEY,			XK_o,		incnmaster,     {.i = +1 } }, */
 	{ MODKEY|ShiftMask,		XK_o,		incnmaster,     {.i = -1 } },
 	{ MODKEY,			XK_p,			spawn,		{.v = (const char*[]){ "mpc", "toggle", NULL } } },
-	{ MODKEY|ShiftMask,		XK_p,			spawn,		SHCMD("mpc pause") },
+	{ MODKEY|ShiftMask,		XK_p,			spawn,		RUN("mpc", "pause") },
 	{ MODKEY,			XK_bracketleft,		spawn,		{.v = (const char*[]){ "mpc", "seek", "-10", NULL } } },
 	{ MODKEY|ShiftMask,		XK_bracketleft,		spawn,		{.v = (const char*[]){ "mpc", "seek", "-60", NULL } } },
 	{ MODKEY,			XK_bracketright,	spawn,		{.v = (const char*[]){ "mpc", "seek", "+10", NULL } } },
@@ -205,7 +205,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	/* { MODKEY,			XK_s,		togglesticky,	{0} }, */
 	{ MODKEY,			XK_d,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
-	{ MODKEY|ShiftMask,		XK_d,		spawn,		{.v = (const char*[]){ "passmenu", NULL } } },
+	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("dl -a") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
 	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
@@ -226,8 +226,8 @@ static const Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ -n \"$s\" ] && kill -9 $s") },
-	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ -n \"$t\" ] && tsp -k $t && pkill -10 status") },
+	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("s=$(ps -a -u $USER | dmenu -l 15 -i -p 'Select process to kill' | awk '{print $1}'); [ $s ] && kill -9 $s") },
+	{ MODKEY,			XK_t,		spawn,		SHCMD("t=$(tsp | dmenu -l 15 -i -p 'Task Spooler' | awk '{print $1}'); [ $t ] && tsp -k $t && pkill -10 status") },
 	{ MODKEY,			XK_n,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "nvim", "-c", "VimwikiIndex", NULL } } },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e podboat") },
 	{ MODKEY,			XK_slash,	spawn,		SHCMD(TERMINAL " -e newsboat") },
@@ -249,15 +249,15 @@ static const Key keys[] = {
 
 	{ MODKEY|ShiftMask,		XK_s,		spawn,		SHCMD(TERMINAL " -e pulsemixer") },
 	{ MODKEY,			XK_F5,		xrdb,		{.v = NULL } },
-	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = \"Yes\" ] && eval $1 && sleep 1 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
-	{ MODKEY,			XK_s,		spawn,		SHCMD("[ \"$(printf 'Yes\\nNo' | dmenu -i -p \"Shutdown?\")\" = \"Yes\" ] && shutdown -h now") },
-	{ MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("systemctl is-active --quiet emby-server && set stop disabled off || set start enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Emby?\")\" = \"Yes\" ] && sudo systemctl $1 emby-server && notify-send -i $PIX/emby.svg \"Emby $2\"") },
+	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD("pidof transmission-daemon >/dev/null && set 'killall transmission-daemon' disabled off || set transmission-daemon enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Transmission?\")\" = Yes ] && eval $1 && sleep 1 && pkill -12 status && notify-send -i $PIX/transmission.svg \"Transmission $2\"") },
+	{ MODKEY,			XK_s,		spawn,		SHCMD("[ \"$(printf 'Yes\\nNo' | dmenu -i -p 'Shutdown?')\" = Yes ] && shutdown -h now") },
+	{ MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("systemctl is-active --quiet emby-server && set stop disabled off || set start enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Emby?\")\" = Yes ] && sudo systemctl $1 emby-server && notify-send -i $PIX/emby.svg \"Emby $2\"") },
 	{ MODKEY,			XK_F8,		spawn,		{.v = (const char*[]){ "mailsync", NULL } } },
 	{ MODKEY|ShiftMask,		XK_z,		spawn,		{.v = (const char*[]){ "mounter", NULL } } },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		{.v = (const char*[]){ "mounter", "unmount", NULL } } },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") }, */
-	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = \"Yes\" ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -34 status") },
-	{ MODKEY|ShiftMask,		XK_i,		spawn,		SHCMD("[ \"$(cat /sys/class/net/w*/operstate)\" = up ] && set off disabled || set on enabled; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $1 wi-fi?\")\" = \"Yes\" ] && nmcli r wifi $1 && sleep 1 && notify-send -i $PIX/wifi-$1.svg \"wifi $2\" && pkill -35 status") },
+	{ MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("[ \"$(cat /sys/class/bluetooth/hci0/rfkill*/state)\" -eq 1 ] && set block disabled off || set unblock enabled on; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $3 Bluetooth?\")\" = Yes ] && rfkill $1 bluetooth && notify-send -i $PIX/bluetooth-$3.svg \"Bluetooth $2\" && pkill -34 status") },
+	{ MODKEY|ShiftMask,		XK_i,		spawn,		SHCMD("[ \"$(cat /sys/class/net/w*/operstate)\" = up ] && set off disabled || set on enabled; [ \"$(printf 'No\\nYes' | dmenu -i -p \"Turn $1 wi-fi?\")\" = Yes ] && nmcli r wifi $1 && sleep 1 && notify-send -i $PIX/wifi-$1.svg \"wifi $2\" && pkill -35 status") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
 	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
