@@ -169,7 +169,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e jsh -c np") },
 	{ MODKEY,			XK_c,		spawn,		SHCMD("st -n floatterm -g 60x20 -e bluetui") },
 	{ MODKEY,			XK_z,		spawn,		SHCMD("dl -v") },
-	{ MODKEY,			XK_x,		spawn,		SHCMD("st -n floatterm -g 60x1 -e sh -c 'read -r input; [ \"$input\" ] && echo \"$input\" >> $NOTES_FILE'") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("[ -e $HOME/local/bin/sybil-add ] || notify-send 'Install script first'; st -n floatterm -g 60x1 -e sh -c 'read -r input; [ \"$input\" ] && setsid -f sybil-add \"$input\"'") },
 	{ MODKEY,			XK_Tab,		spawn,		SHCMD("mpv --terminal=no $(xclip -o)") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_o,		spawn,		RUN("watchlater") },
