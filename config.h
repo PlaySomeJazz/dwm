@@ -111,7 +111,6 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { TERMINAL, NULL };
-static const char *transmissioncmd[] = { BROWSER, "http://localhost:9091", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -174,7 +173,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("dl -d") },
 	{ MODKEY,			XK_o,		spawn,		RUN("watchlater") },
 	{ MODKEY,			XK_u,		spawn,		SHCMD("if setxkbmap -query | grep -q ro; then setxkbmap us; else setxkbmap ro std; fi") },
-	{ MODKEY,			XK_e,		spawn,		{.v = transmissioncmd } },
+	{ MODKEY,			XK_e,		spawn,		RUN(BROWSER, "http://localhost:9091") },
 	/* { MODKEY|ShiftMask,		XK_Tab,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY,			XK_x,		spawn,		SHCMD("dl -i") },
@@ -204,6 +203,7 @@ static const Key keys[] = {
 	{ MODKEY,			XK_a,		togglegaps,	{0} },
 	{ MODKEY|ShiftMask,		XK_a,		defaultgaps,	{0} },
 	/* { MODKEY,			XK_s,		togglesticky,	{0} }, */
+	{ MODKEY,			XK_s,		spawn,		RUN(BROWSER, "https://retroviking.github.io/sybil") },
 	{ MODKEY,			XK_d,		spawn,          {.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY|ShiftMask,		XK_d,		spawn,		SHCMD("dl -a") },
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
